@@ -14,9 +14,6 @@ const routes: Routes = [
 {
 path:'', component: MainLayoutComponent,
 children: [
-{ path:'about', component:AboutComponent},
-{ path:'contact', component:ContactComponent},
-{ path:'menu', component:MenuComponent}
 
 ]
 },
