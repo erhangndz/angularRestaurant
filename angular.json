@@ -42,7 +42,6 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "src/assets/lib/wow/wow.min.js",
               "src/assets/lib/easing/easing.min.js",
@@ -51,7 +50,8 @@
               "src/assets/lib/owlcarousel/owl.carousel.min.js",
               "src/assets/lib/tempusdominus/js/moment.min.js",
               "src/assets/lib/tempusdominus/js/moment-timezone.min.js",
-              "src/assets/js/main.js"
+              "src/assets/js/main.js",
+              "src/assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"
             ]
           },
           "configurations": {
@@ -108,11 +108,11 @@
               }
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/styles.css"
+
             ],
             "scripts": [
-               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
             ]
           }
         }

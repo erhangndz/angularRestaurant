@@ -19,7 +19,7 @@ this.getCategories()
 
 getCategories(){
   this.categoryService.getCategories().subscribe({
-    next: values => this.categories=values,
+    next: values =>{ this.categories=values, this.selectedTab=values[0].id },
     error: err=> console.log(err)
   })
 }

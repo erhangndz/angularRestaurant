@@ -12,6 +12,7 @@ import { MenuComponent } from './menu/menu.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CategoryComponent } from './admin/category/category.component';
 import { FormsModule } from '@angular/forms';
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     AboutComponent,
     ContactComponent,
     MenuComponent,
-    CategoryComponent
+    CategoryComponent,
+    AdminMenuComponent
   ],
   imports: [
     BrowserModule,

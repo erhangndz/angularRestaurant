@@ -1,0 +1,130 @@
+
+
+<div class="container">
+  <h3>Menü</h3>
+<table class="table table-bordered table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Resim</th>
+    <th>Başlık</th>
+    <th>Fiyat</th>
+    <th>Kategori</th>
+    <th>işlemler</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let item of menuList; let i =index">
+    <td>{{i+1}}</td>
+    <td><img src="{{item.imageUrl}}" alt="Menü Resmi" style="height: 75px; width: 75px;" ></td>
+    <td>{{item.title | titlecase }}</td>
+    <td>{{item.price | currency:'₺' }}</td>
+    <td>{{item.category.categoryName}}</td>
+    <td>
+      <button (click)="delete(item.id)" class="btn btn-danger">Sil</button>
+      <button type="button" class="btn btn-info" (click)="onSelected(item)" data-bs-toggle="modal" data-bs-target="#editModal">
+        Güncelle
+      </button>
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createModal">
+  Yeni Ürün
+</button>
+
+</div>
+
+
+<!-- Create Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form #createForm="ngForm" (ngSubmit)="create(); createForm.resetForm()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel">Yeni Ürün Ekle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+     <div class="form-group">
+      <label>Ürün Başlığı</label>
+      <input type="text" name="title" class="form-control" [(ngModel)]="menu.title" required="" >
+     </div>
+     <div class="form-group">
+      <label>Ürün Açıklaması</label>
+      <textarea type="text" name="description" class="form-control" [(ngModel)]="menu.description" required="" rows="4" ></textarea>
+     </div>
+     <div class="form-group">
+      <label>Ürün Fiyatı</label>
+      <input type="number" name="price" class="form-control" [(ngModel)]="menu.price" required="" >
+     </div>
+     <div class="form-group">
+      <label>Ürün Resmi</label>
+      <input type="text" name="imageUrl" [(ngModel)]="menu.imageUrl" required="" class="form-control" >
+     </div>
+
+     <div class="form-group">
+      <label>Kategori</label>
+      <select  [(ngModel)]="menu.categoryId" name="categoryId" class="form-control">
+         <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.categoryName}}</option>
+      </select>
+     </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="button" type="submit" class="btn btn-primary" [disabled]="createForm.invalid" data-bs-dismiss="modal" >Kaydet</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+
+
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form #editForm="ngForm" (ngSubmit)="update()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalLabel">Ürün Güncelle</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Ürün Başlığı</label>
+          <input type="text" name="title" [(ngModel)]="editMenu.title" required="" class="form-control" >
+         </div>
+         <div class="form-group">
+          <label>Ürün Açıklaması</label>
+          <textarea type="text" name="description" [(ngModel)]="editMenu.description" required="" rows="4" class="form-control" ></textarea>
+         </div>
+         <div class="form-group">
+          <label>Ürün Fiyatı</label>
+          <input type="number" name="price" [(ngModel)]="editMenu.price" required="" class="form-control" >
+         </div>
+         <div class="form-group">
+          <label>Ürün Resmi</label>
+          <input type="text" name="imageUrl" [(ngModel)]="editMenu.imageUrl" required="" class="form-control" >
+         </div>
+
+         <div class="form-group">
+          <label>Kategori</label>
+          <select [(ngModel)]="editMenu.categoryId" name="categoryId" class="form-control">
+
+             <option *ngFor="let category of categoryList" selected="{{editMenu.categoryId}}" value="{{category.id}}">{{category.categoryName}}</option>
+          </select>
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+        <button type="button" type="submit" data-bs-dismiss="modal" class="btn btn-primary" [disabled]="editForm.invalid || !editForm.dirty" >Güncelle</button>
+      </div>
+    </div>
+  </form>
+  </div>
+</div>
+

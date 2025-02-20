@@ -7,6 +7,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { MenuComponent } from './menu/menu.component';
 import { CategoryComponent } from './admin/category/category.component';
+import { AdminMenuComponent } from './admin/admin-menu/admin-menu.component';
 
 const routes: Routes = [
 
@@ -22,7 +23,8 @@ children: [
 {
 path:'admin', component:AdminLayoutComponent,
 children: [
-  {path:'category',component:CategoryComponent}
+  {path:'category',component:CategoryComponent},
+  {path:'menu',component:AdminMenuComponent}
 ]
 
 
