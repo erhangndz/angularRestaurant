@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { CategoryService } from '../../_services/category.service';
 import { CategoryModel } from '../../_models/category';
 
+
 @Component({
   selector: 'app-admin-menu',
   standalone: false,
@@ -16,9 +17,11 @@ export class AdminMenuComponent {
   menu: MenuModel= new MenuModel();
   editMenu: any= {};
   categoryList : CategoryModel[];
+  errors: any= {};
 
 constructor(private menuService: MenuService,
             private categoryService: CategoryService
+
 ){
 this.getAll();
 this.getCategories();
@@ -79,7 +82,13 @@ this.editMenu=model;
 
 update(){
   this.menuService.update(this.editMenu.id,this.editMenu).subscribe({
-    error:err=> console.log(err),
+    error:err=> {
+      if(err.status===400){
+
+        this.errors= err.error.errors
+      }
+
+    },
     complete: () =>  Swal.fire({
       title: "Güncelleme işlemi başarılı!",
       text:"Ürün Başarıyla Güncellendi",
@@ -90,13 +99,22 @@ update(){
 
 create(){
   this.menuService.create(this.menu).subscribe({
-next : value => this.getAll(),
-error: err=> console.log(err),
+next : value =>{
+  this.menu= new MenuModel();
+  this.errors= {};
+  this.getAll()},
+error: err=> {
+  if(err.status===400){
+
+    this.errors= err.error.errors
+  }
+
+},
 complete: () =>  Swal.fire({
   title: "Ürün ekleme başarılı!",
   text:"Ürün Başarıyla Kaydedildi",
   icon: "success"
-})
+}).then(()=> location.reload())
   })
 }
 

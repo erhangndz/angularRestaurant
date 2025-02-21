@@ -49,31 +49,48 @@
       <div class="modal-body">
      <div class="form-group">
       <label>Ürün Başlığı</label>
-      <input type="text" name="title" class="form-control" [(ngModel)]="menu.title" required="" >
+      <input type="text" name="title" class="form-control" [(ngModel)]="menu.title"  >
+      <div *ngIf="errors?.Title">
+        <span *ngFor="let error of errors.Title" >{{error}}</span>
+      </div>
+
      </div>
      <div class="form-group">
       <label>Ürün Açıklaması</label>
-      <textarea type="text" name="description" class="form-control" [(ngModel)]="menu.description" required="" rows="4" ></textarea>
+      <textarea type="text" name="description" class="form-control" [(ngModel)]="menu.description"  rows="4" ></textarea>
+      <div *ngIf="errors?.Description">
+        <span *ngFor="let error of errors.Description" >{{error}}</span>
+      </div>
      </div>
      <div class="form-group">
       <label>Ürün Fiyatı</label>
-      <input type="number" name="price" class="form-control" [(ngModel)]="menu.price" required="" >
+      <input type="number" name="price" class="form-control" [(ngModel)]="menu.price"  >
+      <div *ngIf="errors?.Price">
+        <span *ngFor="let error of errors.Price" >{{error}}</span>
+      </div>
      </div>
      <div class="form-group">
       <label>Ürün Resmi</label>
-      <input type="text" name="imageUrl" [(ngModel)]="menu.imageUrl" required="" class="form-control" >
+      <input type="text" name="imageUrl" [(ngModel)]="menu.imageUrl"  class="form-control" >
+      <div *ngIf="errors?.ImageUrl">
+        <span *ngFor="let error of errors.ImageUrl" >{{error}}</span>
+      </div>
      </div>
 
      <div class="form-group">
       <label>Kategori</label>
       <select  [(ngModel)]="menu.categoryId" name="categoryId" class="form-control">
+        <option disabled selected >Kategori Seçiniz</option>
          <option *ngFor="let category of categoryList" value="{{category.id}}">{{category.categoryName}}</option>
       </select>
+      <div *ngIf="errors?.CategoryId">
+        <span *ngFor="let error of errors.CategoryId" >{{error}}</span>
+      </div>
      </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
-        <button type="button" type="submit" class="btn btn-primary" [disabled]="createForm.invalid" data-bs-dismiss="modal" >Kaydet</button>
+        <button type="button" type="submit" class="btn btn-primary" [disabled]="createForm.invalid" >Kaydet</button>
       </div>
     </div>
   </form>
@@ -114,7 +131,6 @@
          <div class="form-group">
           <label>Kategori</label>
           <select [(ngModel)]="editMenu.categoryId" name="categoryId" class="form-control">
-
              <option *ngFor="let category of categoryList" selected="{{editMenu.categoryId}}" value="{{category.id}}">{{category.categoryName}}</option>
           </select>
          </div>
